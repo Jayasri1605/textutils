@@ -4,18 +4,12 @@ import About from './components/About';
 import Nav from './components/Nav';
 import TextForm from './components/TextForm';
 import Alert from './components/Alert';
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes
-} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
   const [alert, setAlert] = useState(null);
 
   const showAlert = (message, type) => {
-    console.log("Showing alert: ", message, type); // Debug log
     setAlert({
       msg: message,
       type: type
@@ -47,16 +41,14 @@ function App() {
   };
 
   return (
-    <Router>
+    <>
       <Nav title='TextUtils' mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} />
       <div className='container my-3'>
-        <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/" element={<TextForm heading="Enter the text to analyze below" mode={mode} />} />
-        </Routes>
+        <TextForm heading="Enter the text to analyze below" mode={mode} />
+        <About />
       </div>
-    </Router>
+    </>
   );
 }
 
